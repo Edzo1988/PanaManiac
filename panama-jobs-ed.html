@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panama Engineering Jobs | Ed Valarezo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --panama-red: #D21034;
+      --panama-blue: #0033A0;
+      --gold: #FFD700;
+      --dark: #0a0f1a;
+      --card-bg: rgba(255,255,255,0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, #1a1f35 50%, #0d1520 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .flag-stripe {
+      height: 6px;
+      background: linear-gradient(90deg,
+        var(--panama-red) 0%, var(--panama-red) 25%,
+        #fff 25%, #fff 50%,
+        var(--panama-blue) 50%, var(--panama-blue) 75%,
+        #fff 75%, #fff 100%);
+      margin-bottom: 20px;
+      border-radius: 3px;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .world-cup-badge {
+      background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--panama-red), var(--panama-blue));
+      border-radius: 2px;
+    }
+
+    .job-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .job-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--panama-red), var(--panama-blue));
+    }
+
+    .job-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .job-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    .job-company {
+      color: var(--gold);
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .job-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .job-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .job-description {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .job-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .tag.hot {
+      background: linear-gradient(135deg, var(--panama-red), #ff4757);
+      color: #fff;
+    }
+
+    .tag.match {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: #fff;
+    }
+
+    .salary-badge {
+      background: linear-gradient(135deg, var(--gold), #f39c12);
+      color: #000;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .apply-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--panama-blue), #0052cc);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .apply-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(0, 51, 160, 0.4);
+    }
+
+    .featured-section {
+      background: linear-gradient(135deg, rgba(210, 16, 52, 0.15), rgba(0, 51, 160, 0.15));
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .featured-section .section-title {
+      color: var(--gold);
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .info-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--gold);
+    }
+
+    .info-card p, .info-card li {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    .info-card ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .resource-link {
+      display: block;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 15px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .resource-link:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .resource-link h4 {
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 5px;
+    }
+
+    .resource-link p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .wa-back-footer {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      z-index: 9999;
+    }
+
+    .wa-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(37, 211, 102, 0.85);
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      backdrop-filter: blur(8px);
+    }
+
+    .wa-back-btn:active {
+      transform: scale(0.95);
+    }
+
+    .wa-back-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: white;
+    }
+
+    .update-time {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+      .stats-bar { gap: 20px; }
+      .stat-value { font-size: 1.5rem; }
+    }
+    /* Navigation Bar */
+    .panama-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 15, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--gold);
+      z-index: 1000;
+      padding: 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .nav-link.active {
+      background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+      border-color: transparent;
+      color: white;
+    }
+
+    .nav-icon {
+      font-size: 14px;
+    }
+
+    body {
+      padding-top: 65px;
+    }
+
+    /* Resume Download Button */
+    .resume-banner {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(0, 51, 160, 0.15));
+      border: 2px solid rgba(255, 215, 0, 0.4);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0 30px;
+      text-align: center;
+    }
+
+    .resume-banner h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--gold), #f39c12);
+      color: #000;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .resume-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .resume-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .nav-link {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      .nav-icon {
+        font-size: 12px;
+      }
+      body {
+        padding-top: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="panama-nav">
+    <div class="nav-container">
+      <a href="panama-2026.html" class="nav-link">
+        <span class="nav-icon">🏆</span>
+        <span>World Cup</span>
+      </a>
+      <a href="panama-jobs-ed.html" class="nav-link active">
+        <span class="nav-icon">💼</span>
+        <span>Jobs</span>
+      </a>
+      <a href="panama-property-guide.html" class="nav-link">
+        <span class="nav-icon">🏠</span>
+        <span>Property</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <div class="flag-stripe"></div>
+    <h1>Panama Job Board</h1>
+    <div class="subtitle">
+      <span>Engineering Opportunities for Ed</span>
+      <span class="world-cup-badge">World Cup 2026 Host</span>
+    </div>
+  </div>
+
+  <!-- Resume Download Banner -->
+  <div class="resume-banner">
+    <h3>📄 Ed Valarezo's Resume</h3>
+    <a href="https://canvas.claude-remote.com/120363423407391730_g_us/EdValarezo_Resume_2026_Updated.pdf" class="resume-btn" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      Download My Resume
+    </a>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value">221+</div>
+      <div class="stat-label">Open Positions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">$22K-80K</div>
+      <div class="stat-label">Salary Range</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">160</div>
+      <div class="stat-label">Remote Options</div>
+    </div>
+  </div>
+
+  <!-- PANAMA CANAL AUTHORITY -->
+  <div class="featured-section">
+    <div class="section-title">Panama Canal Authority (ACP)</div>
+    <p style="margin-bottom: 15px; color: rgba(255,255,255,0.8);">
+      The Panama Canal Authority is one of the top engineering employers in Panama. With the expanded canal and ongoing modernization, they regularly hire experienced engineers.
+    </p>
+
+    <div class="job-card">
+      <div class="job-title">Engineering Positions</div>
+      <div class="job-company">Autoridad del Canal de Panama (ACP)</div>
+      <div class="job-meta">
+        <span>📍 Panama City, Colon</span>
+        <span>🏢 Government Corporation</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag match">Perfect Match - Your Background</span>
+        <span class="tag">Mechanical</span>
+        <span class="tag">Electrical</span>
+        <span class="tag">Systems</span>
+      </div>
+      <div class="salary-badge">$50,000 - $120,000 USD</div>
+      <div class="job-description">
+        <strong>Why Apply:</strong> Your experience with cable harnessing, electromechanical systems, and manufacturing operations directly aligns with ACP's needs in lock operations, ship transit systems, and infrastructure maintenance.
+        <br><br>
+        <strong>Departments hiring engineers:</strong>
+        <ul style="margin: 10px 0 10px 20px; color: rgba(255,255,255,0.8);">
+          <li>Lock Operations & Maintenance</li>
+          <li>Electrical & Control Systems</li>
+          <li>Marine Traffic Control</li>
+          <li>Project Engineering (expansion projects)</li>
+        </ul>
+      </div>
+      <a href="https://pancanal.com/en/careers/" class="apply-btn" target="_blank">View ACP Careers Portal</a>
+    </div>
+  </div>
+
+  <!-- HOT OPPORTUNITIES -->
+  <div class="section">
+    <div class="section-title">Hot Opportunities</div>
+
+    <div class="job-card">
+      <div class="job-title">New Energy Sales Engineer</div>
+      <div class="job-company">BYD Panama, Centroamerica y Caribe</div>
+      <div class="job-meta">
+        <span>📍 Panama City</span>
+        <span>⏰ Posted 1 week ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag hot">Hot</span>
+        <span class="tag">EV/Clean Energy</span>
+        <span class="tag">Technical Sales</span>
+      </div>
+      <div class="job-description">
+        Chinese EV giant expanding in Latin America. Great fit for bilingual engineers with manufacturing background.
+      </div>
+      <a href="https://www.linkedin.com/jobs/search/?keywords=BYD%20engineer&location=Panama" class="apply-btn" target="_blank">Apply on LinkedIn</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">FTTH Technical Engineer</div>
+      <div class="job-company">Beijing Foreign Enterprise Management Consultants</div>
+      <div class="job-meta">
+        <span>📍 Panama City</span>
+        <span>⏰ Posted 2 weeks ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag">Fiber Optics</span>
+        <span class="tag">Telecom</span>
+      </div>
+      <div class="job-description">
+        Fiber-to-the-home infrastructure deployment. Chinese telecom companies investing heavily in Panama's connectivity.
+      </div>
+      <a href="https://www.linkedin.com/jobs/search/?keywords=FTTH%20engineer&location=Panama" class="apply-btn" target="_blank">Apply on LinkedIn</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Radio Frequency Design Engineer</div>
+      <div class="job-company">Beijing Foreign Enterprise Management Consultants</div>
+      <div class="job-meta">
+        <span>📍 Panama City</span>
+        <span>⏰ Posted 6 days ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag hot">New</span>
+        <span class="tag">RF Design</span>
+        <span class="tag">Wireless</span>
+      </div>
+      <div class="job-description">
+        5G infrastructure deployment role. Your electronics background from Cal Poly Pomona is directly relevant.
+      </div>
+      <a href="https://www.linkedin.com/jobs/search/?keywords=RF%20engineer&location=Panama" class="apply-btn" target="_blank">Apply on LinkedIn</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Quality Engineer</div>
+      <div class="job-company">Punto Pago</div>
+      <div class="job-meta">
+        <span>📍 Panama City</span>
+        <span>⏰ Posted 6 days ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag hot">New</span>
+        <span class="tag match">Match - Six Sigma</span>
+        <span class="tag">FinTech</span>
+      </div>
+      <div class="job-description">
+        Your Lean Six Sigma Green Belt certification and manufacturing QA experience make this a strong match.
+      </div>
+      <a href="https://www.linkedin.com/jobs/search/?keywords=quality%20engineer%20Punto%20Pago&location=Panama" class="apply-btn" target="_blank">Apply on LinkedIn</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Machine Learning Engineer</div>
+      <div class="job-company">Consultec-TI Corp</div>
+      <div class="job-meta">
+        <span>📍 Panama City</span>
+        <span>⏰ Posted 1 week ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag">AI/ML</span>
+        <span class="tag">Tech</span>
+      </div>
+      <div class="job-description">
+        Growing tech sector in Panama. Stretch role but your hardware ML integration experience at Meta could translate.
+      </div>
+      <a href="https://www.linkedin.com/jobs/search/?keywords=machine%20learning%20engineer&location=Panama" class="apply-btn" target="_blank">Apply on LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- REMOTE OPPORTUNITIES -->
+  <div class="section">
+    <div class="section-title">Remote Engineering Roles (Panama-Based)</div>
+
+    <div class="job-card">
+      <div class="job-title">Remote Electrical Engineer</div>
+      <div class="job-company">Uptalent.io</div>
+      <div class="job-meta">
+        <span>📍 Remote (Panama City)</span>
+        <span>🌐 LATAM Talent Platform</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag match">Strong Match</span>
+        <span class="tag">Remote</span>
+        <span class="tag">Electrical</span>
+      </div>
+      <div class="job-description">
+        Uptalent connects LATAM engineers with US companies. Your bilingual skills and US work authorization (if retained) are huge advantages.
+      </div>
+      <a href="https://uptalent.io/engineers" class="apply-btn" target="_blank">Join Uptalent</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Transmission Line Engineer (PLS-CADD)</div>
+      <div class="job-company">Uptalent.io</div>
+      <div class="job-meta">
+        <span>📍 Remote (Panama City)</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag">Power Systems</span>
+        <span class="tag">Remote</span>
+      </div>
+      <div class="job-description">
+        Power transmission line design. Growing demand as Panama expands renewable energy infrastructure.
+      </div>
+      <a href="https://uptalent.io" class="apply-btn" target="_blank">Apply via Uptalent</a>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Structural Engineer</div>
+      <div class="job-company">Utopia Design</div>
+      <div class="job-meta">
+        <span>📍 Panama</span>
+        <span>⏰ Posted 2 months ago</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag">Construction</span>
+        <span class="tag">Design</span>
+      </div>
+      <div class="job-description">
+        Panama's construction boom continues with World Cup 2026 infrastructure projects.
+      </div>
+      <a href="https://www.linkedin.com/jobs/search/?keywords=structural%20engineer&location=Panama" class="apply-btn" target="_blank">Apply on LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- SALARY INFO -->
+  <div class="section">
+    <div class="section-title">Panama Engineering Salaries</div>
+    <div class="info-card">
+      <h3>Salary Overview (USD)</h3>
+      <p style="margin-bottom: 15px;">Panama uses USD as currency (Balboa is pegged 1:1). Engineering salaries vary significantly by employer type:</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+        <div>
+          <strong style="color: var(--gold);">Multinational Companies</strong>
+          <p>$50,000 - $120,000/year</p>
+        </div>
+        <div>
+          <strong style="color: var(--gold);">Panama Canal Authority</strong>
+          <p>$45,000 - $100,000/year</p>
+        </div>
+        <div>
+          <strong style="color: var(--gold);">Local Companies</strong>
+          <p>$20,000 - $45,000/year</p>
+        </div>
+        <div>
+          <strong style="color: var(--gold);">Average (All)</strong>
+          <p>~$22,500/year</p>
+        </div>
+      </div>
+      <p style="margin-top: 15px; font-size: 0.85rem; color: rgba(255,255,255,0.6);">
+        Note: Your Meta/Amazon experience commands premium rates. Target multinational employers and negotiate in USD.
+      </p>
+    </div>
+  </div>
+
+  <!-- JOB SEARCH RESOURCES -->
+  <div class="section">
+    <div class="section-title">Job Search Resources</div>
+    <div class="resource-grid">
+      <a href="https://www.linkedin.com/jobs/search/?keywords=engineer&location=Panama&f_WT=2" class="resource-link" target="_blank">
+        <h4>LinkedIn Panama</h4>
+        <p>221+ engineering jobs, filter by remote</p>
+      </a>
+      <a href="https://pancanal.com/en/careers/" class="resource-link" target="_blank">
+        <h4>Panama Canal Careers</h4>
+        <p>Official ACP job portal</p>
+      </a>
+      <a href="https://pa.indeed.com/jobs?q=ingeniero" class="resource-link" target="_blank">
+        <h4>Indeed Panama</h4>
+        <p>Spanish job listings (ingeniero)</p>
+      </a>
+      <a href="https://pa.computrabajo.com/trabajo-de-ingeniero" class="resource-link" target="_blank">
+        <h4>Computrabajo</h4>
+        <p>LATAM job board - Panama section</p>
+      </a>
+      <a href="https://uptalent.io" class="resource-link" target="_blank">
+        <h4>Uptalent.io</h4>
+        <p>Connect LATAM engineers to US companies</p>
+      </a>
+      <a href="https://www.konzerta.com/empleos/busqueda?ubicacion=panama&area=ingenieria" class="resource-link" target="_blank">
+        <h4>Konzerta</h4>
+        <p>Regional job board with Panama listings</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section">
+    <div class="section-title">Tips for Ed</div>
+    <div class="info-card">
+      <h3>Your Competitive Advantages</h3>
+      <ul>
+        <li><strong>Bilingual (English/Spanish)</strong> - Critical for multinational roles and ACP</li>
+        <li><strong>US Big Tech Experience</strong> - Meta/Amazon names open doors everywhere</li>
+        <li><strong>Cable Harnessing Expertise</strong> - Directly applicable to Panama Canal machinery</li>
+        <li><strong>Six Sigma + IPC Certifications</strong> - Quality standards highly valued</li>
+        <li><strong>Manufacturing Scale Experience</strong> - Relevant for growing manufacturing sector</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Networking Recommendations</h3>
+      <ul>
+        <li>Join <strong>LinkedIn Panama Engineering</strong> groups</li>
+        <li>Connect with <strong>ACP employees</strong> on LinkedIn</li>
+        <li>Look into <strong>American Chamber of Commerce Panama (AmCham)</strong></li>
+        <li>Attend <strong>Expat engineering meetups</strong> in Panama City</li>
+        <li>Your Spanish fluency is a major advantage - use it!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="update-time">
+    Last updated: <span id="update-time"></span> | Built for Ed by Halo
+  </div>
+
+  <footer class="wa-back-footer">
+    <a href="whatsapp://" class="wa-back-btn">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Return to WhatsApp
+    </a>
+  </footer>
+
+  <script>
+    document.getElementById('update-time').textContent = new Date().toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZoneName: 'short'
+    });
+  </script>
+</body>
+</html>

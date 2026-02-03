@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANAMA 2026 | World Cup Fan Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --panama-red: #DA121A;
+            --panama-blue: #0047AB;
+            --panama-white: #FFFFFF;
+            --dark-bg: #0a0a0f;
+            --dark-card: #12121a;
+            --dark-card-hover: #1a1a25;
+            --gold: #FFD700;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--panama-red), var(--panama-blue));
+            border-radius: 4px;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image:
+                repeating-linear-gradient(45deg, var(--panama-red) 0, var(--panama-red) 1px, transparent 1px, transparent 50px),
+                repeating-linear-gradient(-45deg, var(--panama-blue) 0, var(--panama-blue) 1px, transparent 1px, transparent 50px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(218, 18, 26, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 71, 171, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 40%);
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Flag Animation */
+        .flag-container {
+            position: relative;
+            width: 200px;
+            height: 140px;
+            margin-bottom: 30px;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .flag {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: flagWave 3s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes flagWave {
+            0%, 100% { transform: rotateY(-5deg) rotateX(2deg); }
+            50% { transform: rotateY(5deg) rotateX(-2deg); }
+        }
+
+        .flag-stripe {
+            height: 50%;
+            display: flex;
+        }
+
+        .flag-stripe > div {
+            flex: 1;
+        }
+
+        .flag-top-left { background: var(--panama-white); position: relative; }
+        .flag-top-right { background: var(--panama-red); }
+        .flag-bottom-left { background: var(--panama-blue); }
+        .flag-bottom-right { background: var(--panama-white); position: relative; }
+
+        .star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+        }
+
+        .star-blue { color: var(--panama-blue); }
+        .star-red { color: var(--panama-red); }
+
+        .hero-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.1em;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--panama-white) 0%, var(--gold) 50%, var(--panama-white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3)); }
+            100% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.6)); }
+        }
+
+        .hero-subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-top: 10px;
+            z-index: 1;
+        }
+
+        .world-cup-badge {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+            border-radius: 50px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            z-index: 1;
+            animation: badgePulse 2s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(218, 18, 26, 0.4);
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-15px); }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--panama-white);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes scrollDot {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--panama-red), var(--panama-blue));
+            border-radius: 2px;
+        }
+
+        /* Group Stage Section */
+        .group-section {
+            background: linear-gradient(180deg, transparent, rgba(218, 18, 26, 0.05), transparent);
+        }
+
+        .group-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+            border-radius: 30px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            animation: groupPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes groupPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(218, 18, 26, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(0, 71, 171, 0.5); }
+        }
+
+        .opponents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .opponent-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opponent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--panama-red), var(--panama-blue));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .opponent-card:hover {
+            transform: translateY(-10px);
+            background: var(--dark-card-hover);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .opponent-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .opponent-flag {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .opponent-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .opponent-rank {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Match Schedule */
+        .schedule-section {
+            background: linear-gradient(180deg, transparent, rgba(0, 71, 171, 0.05), transparent);
+        }
+
+        .match-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .match-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .match-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background: linear-gradient(180deg, var(--panama-red), var(--panama-blue));
+        }
+
+        .match-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .team-flag {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .team-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .panama-team .team-name {
+            background: linear-gradient(90deg, var(--panama-red), var(--panama-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .vs-container {
+            text-align: center;
+        }
+
+        .vs {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .match-info {
+            margin-top: 10px;
+        }
+
+        .match-date {
+            font-weight: 600;
+            color: var(--panama-white);
+            font-size: 1rem;
+        }
+
+        .match-venue {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .match-time {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--gold);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Videos Section */
+        .videos-section {
+            background: linear-gradient(180deg, transparent, rgba(218, 18, 26, 0.03), transparent);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(218, 18, 26, 0.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--panama-white);
+        }
+
+        .video-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: linear-gradient(180deg, transparent, rgba(0, 71, 171, 0.03), transparent);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--panama-red), var(--panama-blue), var(--gold));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--dark-card);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 350px;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Players Section */
+        .players-section {
+            background: linear-gradient(180deg, transparent, rgba(255, 215, 0, 0.03), transparent);
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .player-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--panama-red), transparent, var(--panama-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .player-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .player-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .player-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .player-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 15px 0 5px;
+            text-transform: uppercase;
+        }
+
+        .player-position {
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .player-club {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .player-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--panama-white);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Tickets Section */
+        .tickets-section {
+            background: linear-gradient(180deg, transparent, rgba(218, 18, 26, 0.05), transparent);
+        }
+
+        .tickets-container {
+            background: var(--dark-card);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .tickets-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(218, 18, 26, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(0, 71, 171, 0.1) 0%, transparent 50%);
+        }
+
+        .tickets-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .tickets-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .tickets-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .ticket-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+            color: var(--panama-white);
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(218, 18, 26, 0.4);
+        }
+
+        .ticket-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(218, 18, 26, 0.6);
+        }
+
+        .ticket-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .ticket-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-link:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px 100px;
+            color: var(--text-secondary);
+        }
+
+        .footer-flag {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .footer-sub {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .match-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .team {
+                margin: 10px 0;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .tickets-container {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Price Tracker Section */
+        .tracker-section {
+            background: linear-gradient(180deg, transparent, rgba(255, 215, 0, 0.03), transparent);
+        }
+
+        .tracker-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .status-dot.collecting {
+            background: var(--gold);
+        }
+
+        .status-dot.live {
+            background: #22c55e;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .tracker-group {
+            margin-bottom: 40px;
+        }
+
+        .tracker-group-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tracker-icon {
+            font-size: 1.2rem;
+        }
+
+        .tracker-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tracker-card {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracker-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--panama-red), var(--panama-blue));
+        }
+
+        .tracker-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+
+        .tracker-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .tracker-card-route {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tracker-card-dates {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .tracker-card-badge {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tracker-card-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .price-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .price-value.collecting {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .price-trend {
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .price-trend.up {
+            color: #ef4444;
+        }
+
+        .price-trend.down {
+            color: #22c55e;
+        }
+
+        .price-trend.neutral {
+            color: var(--text-secondary);
+        }
+
+        .tracker-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .tracker-card-game {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .tracker-card-link {
+            color: var(--panama-blue);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .tracker-card-link:hover {
+            color: var(--gold);
+        }
+
+        .chart-container {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .chart-placeholder {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-empty {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .chart-empty-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .chart-empty p {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .chart-empty-sub {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .tracker-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        #lastUpdate {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .refresh-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .refresh-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .refresh-btn:hover .refresh-icon {
+            transform: rotate(180deg);
+        }
+
+        .alert-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, var(--panama-red), #ff4444);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Animations on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Confetti celebration */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        /* Navigation Bar */
+        .panama-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--gold);
+            z-index: 1001;
+            padding: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 10px 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--panama-red), var(--panama-blue));
+            border-color: transparent;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            .nav-icon {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="panama-nav">
+        <div class="nav-container">
+            <a href="panama-2026.html" class="nav-link active">
+                <span class="nav-icon">🏆</span>
+                <span>World Cup</span>
+            </a>
+            <a href="panama-jobs-ed.html" class="nav-link">
+                <span class="nav-icon">💼</span>
+                <span>Jobs</span>
+            </a>
+            <a href="panama-property-guide.html" class="nav-link">
+                <span class="nav-icon">🏠</span>
+                <span>Property</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="bg-pattern"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+
+        <div class="flag-container">
+            <div class="flag">
+                <div class="flag-stripe">
+                    <div class="flag-top-left"><span class="star star-blue">&#9733;</span></div>
+                    <div class="flag-top-right"></div>
+                </div>
+                <div class="flag-stripe">
+                    <div class="flag-bottom-left"></div>
+                    <div class="flag-bottom-right"><span class="star star-red">&#9733;</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="hero-title">Panama</h1>
+        <p class="hero-subtitle">World Cup 2026</p>
+
+        <div class="world-cup-badge">
+            USA &bull; Mexico &bull; Canada
+        </div>
+
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Group Section -->
+    <section class="group-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Group</h2>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="group-badge">GROUP L</div>
+            </div>
+
+            <div class="opponents-grid fade-in">
+                <div class="opponent-card">
+                    <div class="opponent-flag">&#127468;&#127469;</div>
+                    <div class="opponent-name">Ghana</div>
+                    <div class="opponent-rank">FIFA Rank: #69</div>
+                </div>
+                <div class="opponent-card">
+                    <div class="opponent-flag">&#127469;&#127479;</div>
+                    <div class="opponent-name">Croatia</div>
+                    <div class="opponent-rank">FIFA Rank: #12</div>
+                </div>
+                <div class="opponent-card">
+                    <div class="opponent-flag">&#127462;&#127468;</div>
+                    <div class="opponent-name">England</div>
+                    <div class="opponent-rank">FIFA Rank: #5</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Match Schedule -->
+    <section class="schedule-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Match Schedule</h2>
+            </div>
+
+            <div class="match-cards">
+                <div class="match-card fade-in">
+                    <div class="team panama-team">
+                        <div class="team-flag">&#127477;&#127462;</div>
+                        <div class="team-name">Panama</div>
+                    </div>
+                    <div class="vs-container">
+                        <div class="vs">VS</div>
+                        <div class="match-info">
+                            <div class="match-date">June 17, 2026</div>
+                            <div class="match-venue">BMO Field, Toronto</div>
+                            <div class="match-time">7:00 PM ET</div>
+                        </div>
+                    </div>
+                    <div class="team">
+                        <div class="team-flag">&#127468;&#127469;</div>
+                        <div class="team-name">Ghana</div>
+                    </div>
+                </div>
+
+                <div class="match-card fade-in">
+                    <div class="team panama-team">
+                        <div class="team-flag">&#127477;&#127462;</div>
+                        <div class="team-name">Panama</div>
+                    </div>
+                    <div class="vs-container">
+                        <div class="vs">VS</div>
+                        <div class="match-info">
+                            <div class="match-date">June 23, 2026</div>
+                            <div class="match-venue">BMO Field, Toronto</div>
+                            <div class="match-time">7:00 PM ET</div>
+                        </div>
+                    </div>
+                    <div class="team">
+                        <div class="team-flag">&#127469;&#127479;</div>
+                        <div class="team-name">Croatia</div>
+                    </div>
+                </div>
+
+                <div class="match-card fade-in">
+                    <div class="team panama-team">
+                        <div class="team-flag">&#127477;&#127462;</div>
+                        <div class="team-name">Panama</div>
+                    </div>
+                    <div class="vs-container">
+                        <div class="vs">VS</div>
+                        <div class="match-info">
+                            <div class="match-date">June 27, 2026</div>
+                            <div class="match-venue">MetLife Stadium, NYC/NJ</div>
+                            <div class="match-time">7:00 PM ET</div>
+                        </div>
+                    </div>
+                    <div class="team">
+                        <div class="team-flag">&#127462;&#127468;</div>
+                        <div class="team-name">England</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Tracker Section -->
+    <section class="tracker-section" id="tracker">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Price Tracker</h2>
+                <p class="tracker-status" id="trackerStatus">
+                    <span class="status-dot collecting"></span>
+                    Collecting data...
+                </p>
+            </div>
+
+            <!-- Flights -->
+            <div class="tracker-group">
+                <h3 class="tracker-group-title">
+                    <span class="tracker-icon">✈️</span>
+                    Flights from Seattle
+                </h3>
+                <div class="tracker-cards" id="flightCards">
+                    <!-- Cards populated by JS -->
+                </div>
+            </div>
+
+            <!-- Tickets -->
+            <div class="tracker-group">
+                <h3 class="tracker-group-title">
+                    <span class="tracker-icon">🎫</span>
+                    Match Tickets
+                </h3>
+                <div class="tracker-cards" id="ticketCards">
+                    <!-- Cards populated by JS -->
+                </div>
+            </div>
+
+            <!-- Price History Chart -->
+            <div class="chart-container fade-in">
+                <h3 class="tracker-group-title">
+                    <span class="tracker-icon">📈</span>
+                    Price History
+                </h3>
+                <div class="chart-placeholder" id="chartPlaceholder">
+                    <div class="chart-empty">
+                        <span class="chart-empty-icon">📊</span>
+                        <p>Chart will appear once we collect enough data points</p>
+                        <span class="chart-empty-sub">Checking prices hourly</span>
+                    </div>
+                </div>
+                <canvas id="priceChart" style="display:none;"></canvas>
+            </div>
+
+            <div class="tracker-footer">
+                <span id="lastUpdate">Monitoring started — first data coming soon</span>
+                <button class="refresh-btn" onclick="refreshPrices()">
+                    <span class="refresh-icon">↻</span>
+                    Refresh
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section class="videos-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Highlight Reel</h2>
+            </div>
+
+            <div class="videos-grid">
+                <div class="video-card fade-in">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/phQKMwdQPds"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Panama World Cup Qualifiers</div>
+                        <div class="video-desc">Epic moments from the road to 2026</div>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/2Gg6O8As79Q"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Panama vs Mexico</div>
+                        <div class="video-desc">CONCACAF Nations League clash</div>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/8mnKHouN2bU"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Panama vs USA</div>
+                        <div class="video-desc">Historic CONCACAF showdown</div>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/0cKb7uVNS2s"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Copa America 2024</div>
+                        <div class="video-desc">Panama's continental campaign</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Road to 2026 Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Road to 2026</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">October 2017</div>
+                        <div class="timeline-title">The Historic Goal</div>
+                        <div class="timeline-desc">Roman Torres scores the goal that sends Panama to their first ever World Cup in Russia 2018</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">June 2018</div>
+                        <div class="timeline-title">World Cup Debut</div>
+                        <div class="timeline-desc">Panama competes in their first World Cup, scoring their first-ever goal against England</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023-2024</div>
+                        <div class="timeline-title">Nations League Run</div>
+                        <div class="timeline-desc">Dominant performances in CONCACAF Nations League showcase Panama's growth</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">June 2024</div>
+                        <div class="timeline-title">Copa America</div>
+                        <div class="timeline-desc">Impressive showing against South American giants builds confidence</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">November 2024</div>
+                        <div class="timeline-title">Qualification Secured</div>
+                        <div class="timeline-desc">Panama punches their ticket to the 2026 World Cup on home soil</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">June 2026</div>
+                        <div class="timeline-title">World Cup 2026</div>
+                        <div class="timeline-desc">The Canaleros take on the world in North America!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Players -->
+    <section class="players-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Stars to Watch</h2>
+            </div>
+
+            <div class="players-grid">
+                <div class="player-card fade-in">
+                    <div class="player-number">10</div>
+                    <div class="player-name">Adalberto Carrasquilla</div>
+                    <div class="player-position">Midfielder</div>
+                    <div class="player-club">Houston Dynamo (MLS)</div>
+                    <div class="player-stats">
+                        <div class="stat">
+                            <div class="stat-value">45+</div>
+                            <div class="stat-label">Caps</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player-card fade-in">
+                    <div class="player-number">9</div>
+                    <div class="player-name">Jose Fajardo</div>
+                    <div class="player-position">Forward</div>
+                    <div class="player-club">Saprissa (Costa Rica)</div>
+                    <div class="player-stats">
+                        <div class="stat">
+                            <div class="stat-value">35+</div>
+                            <div class="stat-label">Caps</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player-card fade-in">
+                    <div class="player-number">5</div>
+                    <div class="player-name">Eric Davis</div>
+                    <div class="player-position">Defender</div>
+                    <div class="player-club">Red Star Belgrade</div>
+                    <div class="player-stats">
+                        <div class="stat">
+                            <div class="stat-value">60+</div>
+                            <div class="stat-label">Caps</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player-card fade-in">
+                    <div class="player-number">20</div>
+                    <div class="player-name">Freddy Gondola</div>
+                    <div class="player-position">Forward</div>
+                    <div class="player-club">Wisla Plock (Poland)</div>
+                    <div class="player-stats">
+                        <div class="stat">
+                            <div class="stat-value">25+</div>
+                            <div class="stat-label">Caps</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Goals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tickets Section -->
+    <section class="tickets-section">
+        <div class="container">
+            <div class="tickets-container fade-in">
+                <div class="tickets-icon">&#127903;</div>
+                <h2 class="tickets-title">Get Your Tickets</h2>
+                <p class="tickets-desc">Don't miss the chance to see Los Canaleros in action! Secure your seats for the biggest football event in history.</p>
+
+                <a href="https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup/canadamexicousa2026/tickets" class="ticket-btn" target="_blank">
+                    Official FIFA Tickets
+                </a>
+
+                <div class="ticket-links">
+                    <a href="https://www.stubhub.com" class="ticket-link" target="_blank">StubHub</a>
+                    <a href="https://www.viagogo.com" class="ticket-link" target="_blank">Viagogo</a>
+                    <a href="https://www.seatgeek.com" class="ticket-link" target="_blank">SeatGeek</a>
+                    <a href="https://www.ticketmaster.com" class="ticket-link" target="_blank">Ticketmaster</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-flag">&#127477;&#127462;</div>
+        <div class="footer-text">Vamos Panama!</div>
+        <div class="footer-sub">Made with love for Ed &bull; World Cup 2026</div>
+    </footer>
+
+    <!-- WhatsApp Return Button -->
+    <script>
+    (function(){
+        const s=document.createElement('style');
+        s.textContent='.wa-back-footer{position:fixed;bottom:12px;left:12px;z-index:9999;pointer-events:none}.wa-back-btn{display:inline-flex;align-items:center;gap:4px;background:rgba(37,211,102,0.85);color:white;text-decoration:none;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:500;font-family:-apple-system,BlinkMacSystemFont,sans-serif;pointer-events:auto;backdrop-filter:blur(8px)}.wa-back-btn:active{transform:scale(0.95)}.wa-back-btn svg{width:12px;height:12px;fill:white}';
+        document.head.appendChild(s);
+        const f=document.createElement('footer');
+        f.className='wa-back-footer';
+        f.innerHTML='<a href="whatsapp://" class="wa-back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Return to WhatsApp</a>';
+        document.body.appendChild(f);
+    })();
+    </script>
+
+    <!-- Scroll Animation & Confetti -->
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Confetti on page load
+        function createConfetti() {
+            const colors = ['#DA121A', '#0047AB', '#FFFFFF', '#FFD700'];
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animation = `confettiFall ${2 + Math.random() * 2}s linear forwards`;
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+        }
+
+        // Trigger confetti after a short delay
+        setTimeout(createConfetti, 1000);
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Price Tracker Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Flight and ticket data URLs
+        const DATA_URLS = {
+            flights: 'panama-flights.json',
+            tickets: 'panama-tickets.json'
+        };
+
+        let flightData = null;
+        let ticketData = null;
+        let priceChart = null;
+
+        // Format currency
+        function formatPrice(price) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(price);
+        }
+
+        // Format date range
+        function formatDateRange(outbound, returnDate) {
+            const out = new Date(outbound);
+            const ret = new Date(returnDate);
+            const opts = { month: 'short', day: 'numeric' };
+            return `${out.toLocaleDateString('en-US', opts)} – ${ret.toLocaleDateString('en-US', opts)}`;
+        }
+
+        // Get latest price from price history
+        function getLatestPrice(prices) {
+            if (!prices || prices.length === 0) return null;
+            return prices[prices.length - 1];
+        }
+
+        // Calculate price trend
+        function getPriceTrend(prices) {
+            if (!prices || prices.length < 2) return { direction: 'neutral', change: 0 };
+            const latest = prices[prices.length - 1].price;
+            const previous = prices[prices.length - 2].price;
+            const change = ((latest - previous) / previous) * 100;
+            return {
+                direction: change > 0 ? 'up' : change < 0 ? 'down' : 'neutral',
+                change: Math.abs(change).toFixed(1)
+            };
+        }
+
+        // Render flight cards
+        function renderFlightCards(data) {
+            const container = document.getElementById('flightCards');
+            if (!container) return;
+
+            container.innerHTML = data.routes.map(route => {
+                const priceHistory = data.prices.filter(p => p.routeId === route.id);
+                const latest = getLatestPrice(priceHistory);
+                const trend = getPriceTrend(priceHistory);
+                const hasData = latest !== null;
+
+                return `
+                    <div class="tracker-card fade-in">
+                        <div class="tracker-card-header">
+                            <div>
+                                <div class="tracker-card-route">${route.from} → ${route.to}</div>
+                                <div class="tracker-card-dates">${formatDateRange(route.outbound, route.return)}</div>
+                            </div>
+                            <span class="tracker-card-badge">Round trip</span>
+                        </div>
+                        <div class="tracker-card-price">
+                            ${hasData ? `
+                                <span class="price-value">${formatPrice(latest.price)}</span>
+                                <span class="price-trend ${trend.direction}">
+                                    ${trend.direction === 'up' ? '↑' : trend.direction === 'down' ? '↓' : '→'}
+                                    ${trend.change}%
+                                </span>
+                            ` : `
+                                <span class="price-value collecting">Collecting data...</span>
+                            `}
+                        </div>
+                        <div class="tracker-card-meta">
+                            <span class="tracker-card-game">For: ${route.game}</span>
+                            <a href="https://www.google.com/travel/flights?q=flights%20from%20${route.from}%20to%20${route.to}%20on%20${route.outbound}"
+                               target="_blank" class="tracker-card-link">
+                                Search flights →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Re-observe for animations
+            container.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // Render ticket cards
+        function renderTicketCards(data) {
+            const container = document.getElementById('ticketCards');
+            if (!container) return;
+
+            container.innerHTML = data.matches.map(match => {
+                const priceHistory = data.prices.filter(p => p.matchId === match.id);
+                const latest = getLatestPrice(priceHistory);
+                const trend = getPriceTrend(priceHistory);
+                const hasData = latest !== null;
+
+                return `
+                    <div class="tracker-card fade-in">
+                        <div class="tracker-card-header">
+                            <div>
+                                <div class="tracker-card-route">🇵🇦 vs ${match.opponent}</div>
+                                <div class="tracker-card-dates">${match.displayDate} • ${match.venue}</div>
+                            </div>
+                            <span class="tracker-card-badge">Group ${match.group}</span>
+                        </div>
+                        <div class="tracker-card-price">
+                            ${hasData ? `
+                                <span class="price-value">${formatPrice(latest.price)}</span>
+                                <span class="price-trend ${trend.direction}">
+                                    ${trend.direction === 'up' ? '↑' : trend.direction === 'down' ? '↓' : '→'}
+                                    ${trend.change}%
+                                </span>
+                            ` : `
+                                <span class="price-value collecting">Collecting data...</span>
+                            `}
+                        </div>
+                        <div class="tracker-card-meta">
+                            <span class="tracker-card-game">${match.city}</span>
+                            <a href="https://www.stubhub.com/search?q=panama%20${match.opponent}%20world%20cup"
+                               target="_blank" class="tracker-card-link">
+                                Find tickets →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Re-observe for animations
+            container.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // Update status indicator
+        function updateStatus(hasData) {
+            const statusEl = document.getElementById('trackerStatus');
+            const dotEl = statusEl?.querySelector('.status-dot');
+            if (statusEl && dotEl) {
+                if (hasData) {
+                    dotEl.classList.remove('collecting');
+                    dotEl.classList.add('live');
+                    statusEl.innerHTML = '<span class="status-dot live"></span> Live tracking';
+                } else {
+                    dotEl.classList.remove('live');
+                    dotEl.classList.add('collecting');
+                    statusEl.innerHTML = '<span class="status-dot collecting"></span> Collecting data...';
+                }
+            }
+        }
+
+        // Render price history chart
+        function renderChart(flightPrices, ticketPrices) {
+            const placeholder = document.getElementById('chartPlaceholder');
+            const canvas = document.getElementById('priceChart');
+
+            // Check if we have any data
+            const hasFlightData = flightPrices && flightPrices.length > 0;
+            const hasTicketData = ticketPrices && ticketPrices.length > 0;
+
+            if (!hasFlightData && !hasTicketData) {
+                placeholder.style.display = 'flex';
+                canvas.style.display = 'none';
+                return;
+            }
+
+            placeholder.style.display = 'none';
+            canvas.style.display = 'block';
+
+            const datasets = [];
+            const colors = {
+                flight1: '#DA121A',
+                flight2: '#0047AB',
+                flight3: '#FFD700',
+                ticket1: '#22c55e',
+                ticket2: '#a855f7',
+                ticket3: '#f97316'
+            };
+
+            // Group flight prices by route
+            if (hasFlightData) {
+                const flightsByRoute = {};
+                flightPrices.forEach(p => {
+                    if (!flightsByRoute[p.routeId]) flightsByRoute[p.routeId] = [];
+                    flightsByRoute[p.routeId].push(p);
+                });
+
+                let colorIdx = 0;
+                Object.entries(flightsByRoute).forEach(([routeId, prices]) => {
+                    const colorKeys = ['flight1', 'flight2', 'flight3'];
+                    datasets.push({
+                        label: `Flight: ${routeId}`,
+                        data: prices.map(p => ({ x: new Date(p.timestamp), y: p.price })),
+                        borderColor: colors[colorKeys[colorIdx % 3]],
+                        backgroundColor: colors[colorKeys[colorIdx % 3]] + '20',
+                        tension: 0.3,
+                        fill: false
+                    });
+                    colorIdx++;
+                });
+            }
+
+            // Group ticket prices by match
+            if (hasTicketData) {
+                const ticketsByMatch = {};
+                ticketPrices.forEach(p => {
+                    if (!ticketsByMatch[p.matchId]) ticketsByMatch[p.matchId] = [];
+                    ticketsByMatch[p.matchId].push(p);
+                });
+
+                let colorIdx = 0;
+                Object.entries(ticketsByMatch).forEach(([matchId, prices]) => {
+                    const colorKeys = ['ticket1', 'ticket2', 'ticket3'];
+                    datasets.push({
+                        label: `Ticket: ${matchId}`,
+                        data: prices.map(p => ({ x: new Date(p.timestamp), y: p.price })),
+                        borderColor: colors[colorKeys[colorIdx % 3]],
+                        backgroundColor: colors[colorKeys[colorIdx % 3]] + '20',
+                        tension: 0.3,
+                        fill: false
+                    });
+                    colorIdx++;
+                });
+            }
+
+            if (priceChart) {
+                priceChart.destroy();
+            }
+
+            priceChart = new Chart(canvas, {
+                type: 'line',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 2.5,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#a0a0b0', font: { size: 11 } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'day' },
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#a0a0b0' }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: {
+                                color: '#a0a0b0',
+                                callback: v => '$' + v.toLocaleString()
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Load all data
+        async function loadData() {
+            try {
+                const [flightsRes, ticketsRes] = await Promise.all([
+                    fetch(DATA_URLS.flights),
+                    fetch(DATA_URLS.tickets)
+                ]);
+
+                flightData = await flightsRes.json();
+                ticketData = await ticketsRes.json();
+
+                renderFlightCards(flightData);
+                renderTicketCards(ticketData);
+
+                const hasAnyData = (flightData.prices?.length > 0) || (ticketData.prices?.length > 0);
+                updateStatus(hasAnyData);
+                renderChart(flightData.prices || [], ticketData.prices || []);
+
+                // Update last updated time
+                const lastUpdate = document.getElementById('lastUpdate');
+                if (lastUpdate) {
+                    if (flightData.lastUpdated || ticketData.lastUpdated) {
+                        const latest = new Date(flightData.lastUpdated || ticketData.lastUpdated);
+                        lastUpdate.textContent = `Last updated: ${latest.toLocaleString()}`;
+                    } else {
+                        lastUpdate.textContent = 'Monitoring started — first data coming soon';
+                    }
+                }
+            } catch (err) {
+                console.error('Failed to load price data:', err);
+                document.getElementById('lastUpdate').textContent = 'Error loading data — retrying...';
+            }
+        }
+
+        // Refresh button handler
+        async function refreshPrices() {
+            const btn = document.querySelector('.refresh-btn');
+            const icon = btn?.querySelector('.refresh-icon');
+            if (icon) {
+                icon.style.animation = 'spin 1s linear infinite';
+            }
+            await loadData();
+            if (icon) {
+                icon.style.animation = '';
+            }
+        }
+
+        // Add spin animation
+        const spinStyle = document.createElement('style');
+        spinStyle.textContent = '@keyframes spin { 100% { transform: rotate(360deg); } }';
+        document.head.appendChild(spinStyle);
+
+        // Load adapter for Chart.js time scale
+        const chartAdapter = document.createElement('script');
+        chartAdapter.src = 'https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js';
+        chartAdapter.onload = loadData;
+        document.head.appendChild(chartAdapter);
+
+        // Auto-refresh every hour
+        setInterval(loadData, 60 * 60 * 1000);
+    </script>
+</body>
+</html>

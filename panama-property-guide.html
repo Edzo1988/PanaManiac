@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panama Property Guide for Ed's Family</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #0d2818 50%, #0a1f14 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding-bottom: 60px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                        url('https://images.unsplash.com/photo-1565214975484-3cfa9e56f914?w=1200') center/cover;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #f4d03f;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero .flag {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .family-context {
+            background: rgba(244, 208, 63, 0.15);
+            border-left: 4px solid #f4d03f;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .family-context h3 {
+            color: #f4d03f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .family-context ul {
+            list-style: none;
+            font-size: 13px;
+        }
+
+        .family-context li {
+            padding: 4px 0;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px 10px;
+            gap: 8px;
+            background: rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab {
+            flex-shrink: 0;
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: #f4d03f;
+            color: #1a472a;
+        }
+
+        .section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .region-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .region-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .region-icon {
+            font-size: 32px;
+        }
+
+        .region-title {
+            flex: 1;
+        }
+
+        .region-title h2 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .region-title span {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .score-badge {
+            background: linear-gradient(135deg, #f4d03f, #e67e22);
+            color: #1a472a;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-box .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f4d03f;
+        }
+
+        .stat-box .label {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .pros, .cons {
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .pros {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .cons {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .pros h4, .cons h4 {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .pros h4 { color: #2ecc71; }
+        .cons h4 { color: #e74c3c; }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            font-size: 11px;
+        }
+
+        .pros li::before { content: "✓ "; color: #2ecc71; }
+        .cons li::before { content: "✗ "; color: #e74c3c; }
+
+        .property-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .property-img {
+            height: 140px;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .property-info {
+            padding: 15px;
+        }
+
+        .property-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .property-info .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f4d03f;
+        }
+
+        .property-info .details {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .comparison-table th {
+            background: rgba(244, 208, 63, 0.2);
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .highlight { color: #f4d03f; font-weight: 600; }
+        .good { color: #2ecc71; }
+        .warning { color: #e67e22; }
+        .danger { color: #e74c3c; }
+
+        .flight-card {
+            background: linear-gradient(135deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8));
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .flight-route {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .airport {
+            text-align: center;
+        }
+
+        .airport .code {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .airport .name {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .flight-arrow {
+            font-size: 20px;
+            color: #f4d03f;
+        }
+
+        .flight-details {
+            display: flex;
+            justify-content: space-around;
+            font-size: 11px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .school-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .school-card h4 {
+            font-size: 14px;
+            color: #f4d03f;
+            margin-bottom: 8px;
+        }
+
+        .school-card .meta {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .school-card .tuition {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2ecc71;
+            margin-top: 8px;
+        }
+
+        .cost-breakdown {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: #f4d03f;
+        }
+
+        .coffee-section {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.4), rgba(101, 67, 33, 0.4));
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .coffee-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .coffee-farm {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .coffee-farm h4 {
+            font-size: 14px;
+            color: #f4d03f;
+        }
+
+        .coffee-farm p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .verdict-card {
+            background: linear-gradient(135deg, #f4d03f, #e67e22);
+            color: #1a472a;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .verdict-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .verdict-card p {
+            font-size: 13px;
+        }
+
+        .link-btn {
+            display: inline-block;
+            background: #1a472a;
+            color: #f4d03f;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .wa-back-footer {
+            position: fixed;
+            bottom: 12px;
+            left: 12px;
+            z-index: 9999;
+        }
+
+        .wa-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(37, 211, 102, 0.85);
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+
+        .wa-back-btn:active {
+            transform: scale(0.95);
+        }
+
+        .wa-back-btn svg {
+            width: 12px;
+            height: 12px;
+            fill: white;
+        }
+        /* Navigation Bar */
+        .panama-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 71, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #f4d03f;
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 10px 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #f4d03f;
+            color: #f4d03f;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #f4d03f, #e67e22);
+            border-color: transparent;
+            color: #1a472a;
+        }
+
+        .nav-icon {
+            font-size: 14px;
+        }
+
+        body {
+            padding-top: 55px;
+        }
+
+        @media (max-width: 480px) {
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            .nav-icon {
+                font-size: 12px;
+            }
+            body {
+                padding-top: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="panama-nav">
+        <div class="nav-container">
+            <a href="panama-2026.html" class="nav-link">
+                <span class="nav-icon">🏆</span>
+                <span>World Cup</span>
+            </a>
+            <a href="panama-jobs-ed.html" class="nav-link">
+                <span class="nav-icon">💼</span>
+                <span>Jobs</span>
+            </a>
+            <a href="panama-property-guide.html" class="nav-link active">
+                <span class="nav-icon">🏠</span>
+                <span>Property</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="flag">🇵🇦</div>
+        <h1>Panama Property Guide</h1>
+        <p>Comprehensive comparison for Ed's family relocation from Seattle</p>
+    </div>
+
+    <div class="family-context">
+        <h3>👨‍👩‍👧‍👦 Ed's Family Profile</h3>
+        <ul>
+            <li>🧒 5 kids: 11, 8, 1.5 + baby due May 2026</li>
+            <li>✈️ Flying from Seattle (SEA)</li>
+            <li>☕ Loves Geisha coffee - Boquete trip planned</li>
+            <li>🚗 Long drives NOT ideal with young kids</li>
+            <li>🌊 Wants: Nature, water, waterfalls, beach, coffee</li>
+        </ul>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showSection('overview')">Overview</button>
+        <button class="tab" onclick="showSection('boquete')">🏔️ Boquete</button>
+        <button class="tab" onclick="showSection('panama-city')">🏙️ Panama City</button>
+        <button class="tab" onclick="showSection('colon')">🌊 Colón</button>
+        <button class="tab" onclick="showSection('west')">🏗️ West</button>
+        <button class="tab" onclick="showSection('flights')">✈️ Flights</button>
+        <button class="tab" onclick="showSection('schools')">🎓 Schools</button>
+        <button class="tab" onclick="showSection('costs')">💰 Costs</button>
+    </div>
+
+    <!-- OVERVIEW SECTION -->
+    <div id="overview" class="section active">
+        <h2 style="margin-bottom: 20px; font-size: 18px;">📊 Quick Comparison</h2>
+
+        <div style="overflow-x: auto;">
+            <table class="comparison-table">
+                <tr>
+                    <th>Factor</th>
+                    <th>Boquete</th>
+                    <th>Panama City</th>
+                    <th>Colón</th>
+                    <th>West</th>
+                </tr>
+                <tr>
+                    <td>Family Score</td>
+                    <td class="highlight">9/10</td>
+                    <td class="highlight">8/10</td>
+                    <td class="warning">5/10</td>
+                    <td class="good">7/10</td>
+                </tr>
+                <tr>
+                    <td>Home Price (4BR)</td>
+                    <td>$200-400K</td>
+                    <td>$350-700K</td>
+                    <td>$80-180K</td>
+                    <td>$120-280K</td>
+                </tr>
+                <tr>
+                    <td>Schools</td>
+                    <td class="warning">Limited</td>
+                    <td class="good">Excellent</td>
+                    <td class="danger">Basic</td>
+                    <td class="warning">Growing</td>
+                </tr>
+                <tr>
+                    <td>Safety</td>
+                    <td class="good">Very Safe</td>
+                    <td class="good">Safe*</td>
+                    <td class="danger">Caution</td>
+                    <td class="good">Safe</td>
+                </tr>
+                <tr>
+                    <td>Nature Access</td>
+                    <td class="good">Excellent</td>
+                    <td class="warning">1hr drive</td>
+                    <td class="good">Great</td>
+                    <td class="warning">Moderate</td>
+                </tr>
+                <tr>
+                    <td>Expat Community</td>
+                    <td class="good">Large</td>
+                    <td class="good">Large</td>
+                    <td class="danger">Small</td>
+                    <td class="warning">Growing</td>
+                </tr>
+                <tr>
+                    <td>Climate</td>
+                    <td>60-75°F</td>
+                    <td>75-90°F</td>
+                    <td>80-90°F</td>
+                    <td>75-90°F</td>
+                </tr>
+                <tr>
+                    <td>Coffee Access</td>
+                    <td class="highlight">☕☕☕</td>
+                    <td>☕</td>
+                    <td>☕</td>
+                    <td>☕</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="verdict-card">
+            <h3>🎯 Top Pick for Ed's Family</h3>
+            <p><strong>BOQUETE</strong> - Perfect for coffee lovers, amazing nature, safe for kids, established expat community. Only downside: limited international schools (consider homeschool/online hybrid).</p>
+            <p style="margin-top: 10px;"><strong>Runner-up:</strong> Panama City for best schools + city amenities, with weekend trips to Boquete.</p>
+        </div>
+    </div>
+
+    <!-- BOQUETE SECTION -->
+    <div id="boquete" class="section">
+        <div class="region-card">
+            <div class="region-header">
+                <div class="region-icon">🏔️</div>
+                <div class="region-title">
+                    <h2>Boquete</h2>
+                    <span>Chiriquí Province • Elev. 3,900 ft</span>
+                </div>
+                <div class="score-badge">9/10</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="value">$250K</div>
+                    <div class="label">Avg 4BR Home</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">68°F</div>
+                    <div class="label">Avg Temp</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">~25K</div>
+                    <div class="label">Population</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">45 min</div>
+                    <div class="label">to David Airport</div>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; line-height: 1.6; opacity: 0.9;">
+                Boquete is the crown jewel of Panama for nature lovers. Nestled in the Chiriquí Highlands, it's home to the world's most expensive coffee (Geisha) and offers year-round spring-like weather. The town has a thriving expat community with thousands of American and European retirees.
+            </p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Why It's Great</h4>
+                    <ul>
+                        <li>Perfect climate for kids (no AC needed)</li>
+                        <li>World-class Geisha coffee farms</li>
+                        <li>Waterfalls, cloud forests, hiking</li>
+                        <li>Very safe, tight-knit community</li>
+                        <li>Large English-speaking expat base</li>
+                        <li>Lower cost of living than city</li>
+                        <li>Fresh mountain produce</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Considerations</h4>
+                    <ul>
+                        <li>Limited international schools</li>
+                        <li>45 min to David Airport</li>
+                        <li>No beach (2hr to coast)</li>
+                        <li>Smaller medical facilities</li>
+                        <li>Need car for everything</li>
+                        <li>Rainy season (May-Nov)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px;">🏠 Sample Properties</h3>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #27ae60, #2ecc71);">🏡</div>
+            <div class="property-info">
+                <h4>Mountain View Family Home</h4>
+                <div class="price">$285,000</div>
+                <div class="details">4 BR • 3 BA • 2,800 sqft • 0.5 acre • Views of Volcán Barú</div>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #16a085, #1abc9c);">🏘️</div>
+            <div class="property-info">
+                <h4>Valle Escondido Estate</h4>
+                <div class="price">$395,000</div>
+                <div class="details">5 BR • 4 BA • 3,500 sqft • Gated community • Pool access</div>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #2980b9, #3498db);">🌳</div>
+            <div class="property-info">
+                <h4>Coffee Farm Property</h4>
+                <div class="price">$175,000</div>
+                <div class="details">3 BR • 2 BA • 1,800 sqft • 2 acres • Working coffee trees</div>
+            </div>
+        </div>
+
+        <div class="coffee-section">
+            <h3>☕ Geisha Coffee Experience</h3>
+            <p style="font-size: 12px; opacity: 0.9; margin-bottom: 15px;">
+                Boquete is the birthplace of Geisha coffee, which sells for $100-600/lb. Perfect for Ed's coffee obsession!
+            </p>
+
+            <div class="coffee-farm">
+                <h4>Hacienda La Esmeralda</h4>
+                <p>World's most famous Geisha farm. Their coffee has sold for $2,000/lb at auction. Tours available by appointment.</p>
+            </div>
+
+            <div class="coffee-farm">
+                <h4>Finca Lerida</h4>
+                <p>Historic coffee estate with lodging, tours, and bird watching. Family-friendly with restaurant on-site.</p>
+            </div>
+
+            <div class="coffee-farm">
+                <h4>Kotowa Coffee</h4>
+                <p>Award-winning estate offering comprehensive tours. Great for kids - shows the full bean-to-cup process.</p>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px;">🏫 Education Options</h3>
+        <div class="school-card">
+            <h4>Boquete Community School</h4>
+            <div class="meta">K-8 • English curriculum • Small class sizes</div>
+            <div class="tuition">~$3,500/year per child</div>
+        </div>
+        <div class="school-card">
+            <h4>Homeschool Co-ops</h4>
+            <div class="meta">Multiple expat families run co-ops • Flexible scheduling</div>
+            <div class="tuition">Varies by program</div>
+        </div>
+        <div class="school-card">
+            <h4>Online Schools (Popular Choice)</h4>
+            <div class="meta">K12, Connections Academy, etc. • Full US curriculum</div>
+            <div class="tuition">Free (public) to $5,000/year (private)</div>
+        </div>
+    </div>
+
+    <!-- PANAMA CITY SECTION -->
+    <div id="panama-city" class="section">
+        <div class="region-card">
+            <div class="region-header">
+                <div class="region-icon">🏙️</div>
+                <div class="region-title">
+                    <h2>Panama City</h2>
+                    <span>Urban Hub • Sea Level</span>
+                </div>
+                <div class="score-badge">8/10</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="value">$450K</div>
+                    <div class="label">Avg 4BR Home</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">82°F</div>
+                    <div class="label">Avg Temp</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">1.5M</div>
+                    <div class="label">Metro Pop</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">30 min</div>
+                    <div class="label">to PTY Airport</div>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; line-height: 1.6; opacity: 0.9;">
+                Panama City is the cosmopolitan hub with world-class international schools, modern hospitals, and every amenity. The "Miami of Central America" offers high-rise living with beach access about an hour away. Perfect if education is the top priority.
+            </p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Why It's Great</h4>
+                    <ul>
+                        <li>Best international schools in country</li>
+                        <li>World-class hospitals</li>
+                        <li>Direct flights to SEA (Copa)</li>
+                        <li>Modern infrastructure</li>
+                        <li>Large expat community</li>
+                        <li>Entertainment, malls, restaurants</li>
+                        <li>Canal tours for kids</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Considerations</h4>
+                    <ul>
+                        <li>Most expensive option</li>
+                        <li>Hot & humid year-round</li>
+                        <li>Traffic can be brutal</li>
+                        <li>Beach 1+ hour away</li>
+                        <li>Less nature immersion</li>
+                        <li>School tuition $15-25K/year</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px;">🏠 Sample Properties</h3>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #2c3e50, #34495e);">🏢</div>
+            <div class="property-info">
+                <h4>Costa del Este Family Home</h4>
+                <div class="price">$485,000</div>
+                <div class="details">4 BR • 3.5 BA • 3,200 sqft • Gated • Near schools</div>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #8e44ad, #9b59b6);">🏰</div>
+            <div class="property-info">
+                <h4>Clayton Family Residence</h4>
+                <div class="price">$625,000</div>
+                <div class="details">5 BR • 4 BA • 4,000 sqft • Ex-Canal Zone • Large yard</div>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #e67e22, #f39c12);">🌴</div>
+            <div class="property-info">
+                <h4>San Francisco Penthouse</h4>
+                <div class="price">$380,000</div>
+                <div class="details">4 BR • 3 BA • 2,500 sqft • Ocean views • Doorman</div>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px;">🎓 Top Schools</h3>
+        <div class="school-card">
+            <h4>International School of Panama (ISP)</h4>
+            <div class="meta">PreK-12 • IB & US curriculum • 1,200 students</div>
+            <div class="tuition">$18,000-24,000/year</div>
+        </div>
+        <div class="school-card">
+            <h4>Balboa Academy</h4>
+            <div class="meta">PreK-12 • American curriculum • Established 1999</div>
+            <div class="tuition">$12,000-18,000/year</div>
+        </div>
+        <div class="school-card">
+            <h4>King's College Panama</h4>
+            <div class="meta">K-12 • British curriculum • New campus</div>
+            <div class="tuition">$14,000-20,000/year</div>
+        </div>
+    </div>
+
+    <!-- COLÓN SECTION -->
+    <div id="colon" class="section">
+        <div class="region-card">
+            <div class="region-header">
+                <div class="region-icon">🌊</div>
+                <div class="region-title">
+                    <h2>Colón</h2>
+                    <span>Caribbean Coast • Sea Level</span>
+                </div>
+                <div class="score-badge" style="background: linear-gradient(135deg, #e67e22, #d35400);">5/10</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="value">$120K</div>
+                    <div class="label">Avg 4BR Home</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">84°F</div>
+                    <div class="label">Avg Temp</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">250K</div>
+                    <div class="label">Metro Pop</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">1.5 hr</div>
+                    <div class="label">to PTY Airport</div>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; line-height: 1.6; opacity: 0.9;">
+                Colón offers Caribbean beaches and canal-related employment but has significant safety concerns. The Portobelo area (30 min east) is beautiful with historic forts and beaches, but requires careful neighborhood selection.
+            </p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Why Consider It</h4>
+                    <ul>
+                        <li>Most affordable prices</li>
+                        <li>Caribbean beaches nearby</li>
+                        <li>Historic Portobelo forts</li>
+                        <li>Canal Free Zone jobs</li>
+                        <li>Authentic Afro-Panamanian culture</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Major Concerns</h4>
+                    <ul>
+                        <li>⚠️ Safety issues in city center</li>
+                        <li>Limited international schools</li>
+                        <li>Small expat community</li>
+                        <li>Spanish essential</li>
+                        <li>Infrastructure challenges</li>
+                        <li>NOT recommended for families</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: rgba(231, 76, 60, 0.2); border: 1px solid rgba(231, 76, 60, 0.4); border-radius: 12px; padding: 15px; margin-top: 15px;">
+            <h4 style="color: #e74c3c; margin-bottom: 10px;">⚠️ Safety Advisory</h4>
+            <p style="font-size: 12px; opacity: 0.9;">
+                Colón city has higher crime rates than other areas. If considering this region, focus on:
+            </p>
+            <ul style="font-size: 12px; margin-top: 10px; padding-left: 20px;">
+                <li><strong>Portobelo area</strong> - Tourist-oriented, safer</li>
+                <li><strong>Gated communities</strong> - Required for families</li>
+                <li><strong>Costa Arriba</strong> - Developing beach area</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- WEST PANAMA SECTION -->
+    <div id="west" class="section">
+        <div class="region-card">
+            <div class="region-header">
+                <div class="region-icon">🏗️</div>
+                <div class="region-title">
+                    <h2>West Panama</h2>
+                    <span>Chorrera / Arraiján • Developing</span>
+                </div>
+                <div class="score-badge" style="background: linear-gradient(135deg, #3498db, #2980b9);">7/10</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="value">$180K</div>
+                    <div class="label">Avg 4BR Home</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">82°F</div>
+                    <div class="label">Avg Temp</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">500K+</div>
+                    <div class="label">Combined Pop</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">45 min</div>
+                    <div class="label">to PTY Airport</div>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; line-height: 1.6; opacity: 0.9;">
+                The fastest-growing area near Panama City. New metro line extension, shopping malls, and modern developments are making this the "suburbs" of Panama City at a fraction of the price. Good for families wanting space and value.
+            </p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Why It's Growing</h4>
+                    <ul>
+                        <li>Best value for money</li>
+                        <li>New metro line access</li>
+                        <li>Modern developments</li>
+                        <li>Larger lots available</li>
+                        <li>Safe gated communities</li>
+                        <li>30-45 min to city schools</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Considerations</h4>
+                    <ul>
+                        <li>Still developing infrastructure</li>
+                        <li>Commute to city for schools</li>
+                        <li>Fewer international amenities</li>
+                        <li>Limited expat community</li>
+                        <li>Hot climate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px;">🏠 Sample Properties</h3>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #1abc9c, #16a085);">🏠</div>
+            <div class="property-info">
+                <h4>Costa Verde New Build</h4>
+                <div class="price">$195,000</div>
+                <div class="details">4 BR • 3 BA • 2,400 sqft • Gated • Near new metro</div>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-img" style="background: linear-gradient(45deg, #3498db, #2980b9);">🌳</div>
+            <div class="property-info">
+                <h4>Arraijan Family Home</h4>
+                <div class="price">$165,000</div>
+                <div class="details">4 BR • 2.5 BA • 2,000 sqft • Large yard • Quiet street</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLIGHTS SECTION -->
+    <div id="flights" class="section">
+        <h2 style="margin-bottom: 20px; font-size: 18px;">✈️ Getting to Panama from Seattle</h2>
+
+        <div class="flight-card">
+            <div class="flight-route">
+                <div class="airport">
+                    <div class="code">SEA</div>
+                    <div class="name">Seattle-Tacoma</div>
+                </div>
+                <div class="flight-arrow">→</div>
+                <div class="airport">
+                    <div class="code">PTY</div>
+                    <div class="name">Panama City</div>
+                </div>
+            </div>
+            <div class="flight-details">
+                <div><strong>Copa Airlines</strong></div>
+                <div>1 stop (LAX/MIA)</div>
+                <div>~9-12 hrs</div>
+                <div>$500-800 RT</div>
+            </div>
+        </div>
+
+        <div class="flight-card">
+            <div class="flight-route">
+                <div class="airport">
+                    <div class="code">SEA</div>
+                    <div class="name">Seattle-Tacoma</div>
+                </div>
+                <div class="flight-arrow">→</div>
+                <div class="airport">
+                    <div class="code">SJO</div>
+                    <div class="name">San José, CR</div>
+                </div>
+            </div>
+            <div class="flight-details">
+                <div><strong>Alaska/United</strong></div>
+                <div>Direct or 1 stop</div>
+                <div>~6-8 hrs</div>
+                <div>$400-600 RT</div>
+            </div>
+        </div>
+
+        <div style="background: rgba(244, 208, 63, 0.15); border: 1px solid rgba(244, 208, 63, 0.3); border-radius: 12px; padding: 15px; margin-top: 20px;">
+            <h4 style="color: #f4d03f; margin-bottom: 10px;">🎯 Best Route to Boquete</h4>
+            <p style="font-size: 12px; line-height: 1.6;">
+                <strong>Option 1: SEA → PTY → DAV</strong><br>
+                Seattle to Panama City (Copa), then domestic flight to David (1 hr). Then 45 min drive to Boquete. Total: ~12 hrs.
+            </p>
+            <p style="font-size: 12px; line-height: 1.6; margin-top: 10px;">
+                <strong>Option 2: SEA → SJO → Drive</strong><br>
+                Seattle to San José, Costa Rica (often cheaper). Then 6-7 hr drive through beautiful scenery. Consider if kids can handle the drive. Total: ~14 hrs.
+            </p>
+            <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">
+                ⚠️ With 5 kids including toddlers, Option 1 (more flights, less driving) is probably better!
+            </p>
+        </div>
+
+        <h3 style="margin: 25px 0 15px; font-size: 16px;">🛫 Key Airlines</h3>
+
+        <div style="display: grid; gap: 10px;">
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                <strong>Copa Airlines</strong> - Panama's flag carrier, best connections to PTY
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                <strong>United</strong> - Good SEA connections via Houston/Denver
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                <strong>Delta</strong> - Via Atlanta to PTY
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                <strong>Air Panama</strong> - Domestic flights PTY to David (DAV)
+            </div>
+        </div>
+    </div>
+
+    <!-- SCHOOLS SECTION -->
+    <div id="schools" class="section">
+        <h2 style="margin-bottom: 20px; font-size: 18px;">🎓 International Schools</h2>
+
+        <p style="font-size: 13px; opacity: 0.9; margin-bottom: 20px;">
+            With 5 kids (ages 11, 8, 1.5 + baby), education is a major factor. Here's the breakdown:
+        </p>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px; color: #f4d03f;">Panama City (Best Options)</h3>
+
+        <div class="school-card">
+            <h4>International School of Panama (ISP)</h4>
+            <div class="meta">📍 Clayton • PreK-12 • IB & US Curriculum • 40+ nationalities</div>
+            <div class="tuition">$18,000-24,000/year • 5 kids = ~$100K/year 😬</div>
+        </div>
+
+        <div class="school-card">
+            <h4>Balboa Academy</h4>
+            <div class="meta">📍 Costa del Este • PreK-12 • American Curriculum</div>
+            <div class="tuition">$12,000-18,000/year • More affordable option</div>
+        </div>
+
+        <div class="school-card">
+            <h4>King's College Panama</h4>
+            <div class="meta">📍 West Panama • K-12 • British Curriculum • Modern Campus</div>
+            <div class="tuition">$14,000-20,000/year</div>
+        </div>
+
+        <div class="school-card">
+            <h4>Metropolitan School of Panama</h4>
+            <div class="meta">📍 Costa del Este • PreK-12 • American Curriculum</div>
+            <div class="tuition">$10,000-15,000/year</div>
+        </div>
+
+        <h3 style="margin: 25px 0 15px; font-size: 16px; color: #f4d03f;">Boquete (Limited)</h3>
+
+        <div class="school-card">
+            <h4>Boquete Community School</h4>
+            <div class="meta">📍 Boquete • K-8 • Small classes • English</div>
+            <div class="tuition">~$3,500/year per child</div>
+        </div>
+
+        <div class="school-card">
+            <h4>Homeschool/Online Hybrid</h4>
+            <div class="meta">Popular with expats • Flexible • Multiple families coordinate</div>
+            <div class="tuition">$0-5,000/year depending on program</div>
+        </div>
+
+        <div style="background: rgba(52, 152, 219, 0.2); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 12px; padding: 15px; margin-top: 20px;">
+            <h4 style="color: #3498db; margin-bottom: 10px;">💡 Cost Comparison (5 kids)</h4>
+            <div class="cost-breakdown">
+                <div class="cost-row">
+                    <span>Panama City Private</span>
+                    <span>$60-120K/year</span>
+                </div>
+                <div class="cost-row">
+                    <span>Boquete Local + Online</span>
+                    <span>$15-25K/year</span>
+                </div>
+                <div class="cost-row">
+                    <span>Full Homeschool</span>
+                    <span>$2-5K/year</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COSTS SECTION -->
+    <div id="costs" class="section">
+        <h2 style="margin-bottom: 20px; font-size: 18px;">💰 Cost of Living</h2>
+
+        <p style="font-size: 13px; opacity: 0.9; margin-bottom: 20px;">
+            Panama uses USD, so no currency conversion headaches! Costs are 30-40% lower than US on average.
+        </p>
+
+        <h3 style="margin: 20px 0 15px; font-size: 16px; color: #f4d03f;">Monthly Budget (Family of 7)</h3>
+
+        <div class="cost-breakdown">
+            <div class="cost-row">
+                <span>🏠 Rent (4BR house)</span>
+                <span>$1,500 - $3,000</span>
+            </div>
+            <div class="cost-row">
+                <span>🍎 Groceries</span>
+                <span>$800 - $1,200</span>
+            </div>
+            <div class="cost-row">
+                <span>⚡ Utilities</span>
+                <span>$150 - $300</span>
+            </div>
+            <div class="cost-row">
+                <span>🚗 Car/Transport</span>
+                <span>$300 - $500</span>
+            </div>
+            <div class="cost-row">
+                <span>📱 Phone/Internet</span>
+                <span>$75 - $120</span>
+            </div>
+            <div class="cost-row">
+                <span>🏥 Health Insurance</span>
+                <span>$500 - $1,000</span>
+            </div>
+            <div class="cost-row">
+                <span>🎓 School (varies)</span>
+                <span>$0 - $10,000</span>
+            </div>
+            <div class="cost-row">
+                <span>🎉 Entertainment</span>
+                <span>$300 - $500</span>
+            </div>
+            <div class="cost-row">
+                <span><strong>TOTAL</strong></span>
+                <span><strong>$3,600 - $16,600</strong></span>
+            </div>
+        </div>
+
+        <h3 style="margin: 25px 0 15px; font-size: 16px; color: #f4d03f;">By Region</h3>
+
+        <div style="overflow-x: auto;">
+            <table class="comparison-table">
+                <tr>
+                    <th>Expense</th>
+                    <th>Boquete</th>
+                    <th>Panama City</th>
+                    <th>Colón</th>
+                    <th>West</th>
+                </tr>
+                <tr>
+                    <td>4BR Rent</td>
+                    <td class="good">$1,200</td>
+                    <td>$2,500</td>
+                    <td class="good">$800</td>
+                    <td class="good">$1,400</td>
+                </tr>
+                <tr>
+                    <td>Groceries</td>
+                    <td class="good">$700</td>
+                    <td>$1,000</td>
+                    <td class="good">$600</td>
+                    <td>$850</td>
+                </tr>
+                <tr>
+                    <td>Utilities</td>
+                    <td class="good">$100</td>
+                    <td>$250</td>
+                    <td>$200</td>
+                    <td>$200</td>
+                </tr>
+                <tr>
+                    <td>Car Needed?</td>
+                    <td>Essential</td>
+                    <td>Optional</td>
+                    <td>Essential</td>
+                    <td>Essential</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="background: rgba(46, 204, 113, 0.2); border: 1px solid rgba(46, 204, 113, 0.3); border-radius: 12px; padding: 15px; margin-top: 20px;">
+            <h4 style="color: #2ecc71; margin-bottom: 10px;">💵 Key Savings vs Seattle</h4>
+            <ul style="font-size: 12px; line-height: 1.8;">
+                <li>No state income tax (same as WA)</li>
+                <li>Property tax ~0.5% (vs 1% WA)</li>
+                <li>Healthcare 50-70% cheaper</li>
+                <li>Dining out 40% cheaper</li>
+                <li>Domestic help $400-600/mo (housekeeper, nanny)</li>
+                <li>Gas $3.50/gal (vs $4.50+ WA)</li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(231, 76, 60, 0.2); border: 1px solid rgba(231, 76, 60, 0.3); border-radius: 12px; padding: 15px; margin-top: 15px;">
+            <h4 style="color: #e74c3c; margin-bottom: 10px;">⚠️ Hidden Costs</h4>
+            <ul style="font-size: 12px; line-height: 1.8;">
+                <li>Import tax on electronics/goods: 10-20%</li>
+                <li>Car prices higher than US (~20%)</li>
+                <li>Flights home: Budget $5-8K/year for family</li>
+                <li>Private school: $50-100K/year for 5 kids</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+
+    <footer class="wa-back-footer">
+        <a href="whatsapp://" class="wa-back-btn">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Return to WhatsApp
+        </a>
+    </footer>
+</body>
+</html>
