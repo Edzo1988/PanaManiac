@@ -31,6 +31,7 @@
       color: var(--text-primary);
       min-height: 100vh;
       line-height: 1.5;
+      padding-top: 55px;
       padding-bottom: calc(80px + env(safe-area-inset-bottom, 0));
     }
 
@@ -40,34 +41,68 @@
       padding: 24px 16px;
     }
 
-    /* Navigation */
-    nav {
+    /* Navigation Bar */
+    .panama-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #FFD700;
+      z-index: 1001;
+      padding: 0;
+    }
+
+    .nav-container {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 15px;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    nav a {
-      padding: 8px 16px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-secondary);
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
-      font-size: 14px;
-      transition: all 0.15s;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      white-space: nowrap;
     }
 
-    nav a:hover {
-      background: var(--bg-hover);
-      color: var(--text-primary);
+    .nav-link:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #FFD700;
+      color: #FFD700;
     }
 
-    nav a.active {
-      background: var(--accent);
-      border-color: var(--accent);
+    .nav-link.active {
+      background: linear-gradient(135deg, #DA121A, #0047AB);
+      border-color: transparent;
       color: white;
+    }
+
+    .nav-icon {
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .nav-link {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      .nav-icon {
+        font-size: 12px;
+      }
     }
 
     /* Header */
@@ -407,14 +442,29 @@
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="panama-nav">
+    <div class="nav-container">
+      <a href="panama-2026.html" class="nav-link">
+        <span class="nav-icon">🏆</span>
+        <span>World Cup</span>
+      </a>
+      <a href="panama-jobs-ed.html" class="nav-link">
+        <span class="nav-icon">💼</span>
+        <span>Jobs</span>
+      </a>
+      <a href="panama-property-guide.html" class="nav-link">
+        <span class="nav-icon">🏠</span>
+        <span>Property</span>
+      </a>
+      <a href="itinerary.html" class="nav-link active">
+        <span class="nav-icon">📅</span>
+        <span>Itinerary</span>
+      </a>
+    </div>
+  </nav>
+
   <div class="container">
-    <!-- Navigation -->
-    <nav>
-      <a href="https://edzo1988.github.io/PanaManiac/panama-2026.html">🇵🇦 Panama 2026</a>
-      <a href="https://edzo1988.github.io/PanaManiac/job-board.html">💼 Job Board</a>
-      <a href="https://edzo1988.github.io/PanaManiac/property-guide.html">🏠 Property Guide</a>
-      <a href="#" class="active">📅 Itinerary</a>
-    </nav>
 
     <!-- Header -->
     <header>
