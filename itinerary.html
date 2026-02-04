@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Panama 2026 Family Itinerary</title>
+  <style>
+    :root {
+      --bg-base: #0a0a0f;
+      --bg-elevated: rgba(255, 255, 255, 0.03);
+      --bg-hover: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-primary: rgba(255, 255, 255, 0.95);
+      --text-secondary: rgba(255, 255, 255, 0.6);
+      --text-tertiary: rgba(255, 255, 255, 0.4);
+      --accent: #3b82f6;
+      --family: #22c55e;
+      --travel: #3b82f6;
+      --special: #ec4899;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding-bottom: calc(80px + env(safe-area-inset-bottom, 0));
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    nav a {
+      padding: 8px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+
+    nav a:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    nav a.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .flag {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.family { background: var(--family); }
+    .legend-dot.travel { background: var(--travel); }
+    .legend-dot.special { background: var(--special); }
+
+    /* Calendar */
+    .calendar {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .calendar-header {
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .calendar-header h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .weekday {
+      padding: 12px 4px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .day {
+      min-height: 80px;
+      padding: 8px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .day:nth-child(7n) {
+      border-right: none;
+    }
+
+    .day.empty {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .day-number {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .day.today .day-number {
+      background: var(--accent);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .event {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .event:hover {
+      opacity: 0.8;
+    }
+
+    .event.family {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--family);
+    }
+
+    .event.travel {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--travel);
+    }
+
+    .event.special {
+      background: rgba(236, 72, 153, 0.2);
+      color: var(--special);
+    }
+
+    /* Suggest Event Section */
+    .suggest-section {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .suggest-section h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn {
+      min-height: 44px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 500px) {
+      .btn-group {
+        flex-direction: column;
+      }
+      .btn-group .btn {
+        width: 100%;
+      }
+    }
+
+    /* Event Detail Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .modal h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .modal-date {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      margin-top: 16px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .day {
+        min-height: 60px;
+        padding: 4px;
+      }
+
+      .day-number {
+        font-size: 12px;
+      }
+
+      .event {
+        font-size: 9px;
+        padding: 1px 4px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav>
+      <a href="https://edzo1988.github.io/PanaManiac/panama-2026.html">🇵🇦 Panama 2026</a>
+      <a href="https://edzo1988.github.io/PanaManiac/job-board.html">💼 Job Board</a>
+      <a href="https://edzo1988.github.io/PanaManiac/property-guide.html">🏠 Property Guide</a>
+      <a href="#" class="active">📅 Itinerary</a>
+    </nav>
+
+    <!-- Header -->
+    <header>
+      <div class="flag">🇵🇦</div>
+      <h1>Panama 2026 Family Itinerary</h1>
+      <p class="subtitle">February Trip Calendar</p>
+    </header>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot family"></div>
+        <span>Family</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot travel"></div>
+        <span>Travel</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot special"></div>
+        <span>Special</span>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="calendar">
+      <div class="calendar-header">
+        <h2>February 2026</h2>
+      </div>
+      <div class="weekdays">
+        <div class="weekday">Sun</div>
+        <div class="weekday">Mon</div>
+        <div class="weekday">Tue</div>
+        <div class="weekday">Wed</div>
+        <div class="weekday">Thu</div>
+        <div class="weekday">Fri</div>
+        <div class="weekday">Sat</div>
+      </div>
+      <div class="days" id="calendar-days">
+        <!-- Days will be rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Suggest Event -->
+    <div class="suggest-section">
+      <h3>✨ Suggest an Event</h3>
+      <form id="suggest-form">
+        <div class="form-group">
+          <label for="event-name">Event Name</label>
+          <input type="text" id="event-name" placeholder="e.g., Beach Day" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="event-date">Date</label>
+            <input type="date" id="event-date" min="2026-02-01" max="2026-02-28" required>
+          </div>
+          <div class="form-group">
+            <label for="event-time">Time (optional)</label>
+            <input type="time" id="event-time">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event-desc">Description</label>
+          <textarea id="event-desc" placeholder="Any details..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="your-name">Your Name</label>
+          <input type="text" id="your-name" placeholder="Who's suggesting this?" required>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">📧 Email Suggestion</button>
+          <button type="button" class="btn btn-secondary" onclick="addToGoogleCal()">📅 Add to Google</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Event Modal -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h4 id="modal-title"></h4>
+      <p class="modal-date" id="modal-date"></p>
+      <p id="modal-desc"></p>
+      <button class="btn btn-secondary modal-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Events data
+    const events = [
+      { date: 8, title: 'Church', type: 'family' },
+      { date: 8, title: 'Fam Night', type: 'family' },
+      { date: 13, title: 'Movie Night', type: 'family' },
+      { date: 14, title: "Valentine's Day", type: 'special', desc: '💕 Happy Valentine\'s Day!' },
+      { date: 14, title: 'Flight UA2', type: 'travel', desc: 'Departure flight' },
+      { date: 14, title: 'Flight UA1', type: 'travel', desc: 'Arrival flight' },
+      { date: 15, title: 'Church', type: 'family' },
+      { date: 16, title: 'Gamboa Day', type: 'travel', desc: '🐒 Isla de los Monos, Gamboa Rainforest, Mariposario (butterflies), Sloths, Canopy, Mirador, Crocodiles, Barcototes, Fishing, Bird watching' },
+      { date: 17, title: 'Mid-Winter Break', type: 'special', endDate: 21, desc: 'School break - Feb 17-21' },
+      { date: 17, title: 'Embera (AM)', type: 'travel', desc: '🛶 Morning visit to Embera indigenous village' },
+      { date: 17, title: 'Causeway (PM)', type: 'travel', desc: '🦜 Biodiversity Museum, Causeway Zoo, Punta Culebra' },
+      { date: 18, title: 'San Blas', type: 'travel', endDate: 20, desc: '🏝️ San Blas Islands Adventure!' },
+      { date: 20, title: 'Movie Night', type: 'family' },
+      { date: 22, title: 'Church', type: 'family' },
+      { date: 22, title: 'Las Perlas', type: 'travel', endDate: 23, desc: '🚤 Boat trip with Jean (~30 people), overnight stay on the islands' },
+      { date: 24, title: 'Buenaventura', type: 'travel', endDate: 26, desc: '🌴 The Buenaventura Resort' },
+      { date: 28, title: 'Flight UA2', type: 'travel', desc: 'Return flight' },
+      { date: 28, title: 'Flight UA1', type: 'travel', desc: 'Return flight' }
+    ];
+
+    // Feb 2026 starts on Sunday (0) and has 28 days
+    const firstDay = 0; // Sunday
+    const totalDays = 28;
+
+    function renderCalendar() {
+      const container = document.getElementById('calendar-days');
+      let html = '';
+
+      // Empty cells before first day
+      for (let i = 0; i < firstDay; i++) {
+        html += '<div class="day empty"></div>';
+      }
+
+      // Days of month
+      for (let day = 1; day <= totalDays; day++) {
+        const dayEvents = events.filter(e => {
+          if (e.endDate) {
+            return day >= e.date && day <= e.endDate;
+          }
+          return e.date === day;
+        });
+
+        const today = new Date();
+        const isToday = today.getMonth() === 1 && today.getDate() === day && today.getFullYear() === 2026;
+
+        html += `<div class="day${isToday ? ' today' : ''}">
+          <div class="day-number">${day}</div>
+          ${dayEvents.map(e => `
+            <div class="event ${e.type}" onclick="showEvent('${e.title}', 'Feb ${e.date}${e.endDate ? '-'+e.endDate : ''}, 2026', '${e.desc || ''}')">
+              ${e.title}
+            </div>
+          `).join('')}
+        </div>`;
+      }
+
+      // Fill remaining cells
+      const totalCells = firstDay + totalDays;
+      const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+      for (let i = 0; i < remaining; i++) {
+        html += '<div class="day empty"></div>';
+      }
+
+      container.innerHTML = html;
+    }
+
+    function showEvent(title, date, desc) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-date').textContent = date;
+      document.getElementById('modal-desc').textContent = desc || 'No additional details.';
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('active');
+      }
+    }
+
+    // Form submission - mailto
+    document.getElementById('suggest-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('event-name').value;
+      const date = document.getElementById('event-date').value;
+      const time = document.getElementById('event-time').value;
+      const desc = document.getElementById('event-desc').value;
+      const who = document.getElementById('your-name').value;
+
+      const subject = encodeURIComponent(`Panama Trip Event Suggestion: ${name}`);
+      const body = encodeURIComponent(
+        `New event suggestion for Panama 2026!\n\n` +
+        `Event: ${name}\n` +
+        `Date: ${date}\n` +
+        `Time: ${time || 'Not specified'}\n` +
+        `Description: ${desc || 'None'}\n\n` +
+        `Suggested by: ${who}`
+      );
+
+      window.location.href = `mailto:edzo1988@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    // Google Calendar link
+    function addToGoogleCal() {
+      const name = document.getElementById('event-name').value;
+      const date = document.getElementById('event-date').value;
+      const time = document.getElementById('event-time').value;
+      const desc = document.getElementById('event-desc').value;
+
+      if (!name || !date) {
+        alert('Please fill in event name and date first');
+        return;
+      }
+
+      // Format date for Google Calendar
+      const dateStr = date.replace(/-/g, '');
+      let timeStr = '';
+      if (time) {
+        timeStr = time.replace(':', '') + '00';
+      }
+
+      const startDate = time ? `${dateStr}T${timeStr}` : dateStr;
+      const endDate = startDate; // Same day event
+
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(name)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(desc || '')}&location=Panama`;
+
+      window.open(gcalUrl, '_blank');
+    }
+
+    // Initialize
+    renderCalendar();
+
+    // Close modal on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+
+  <!-- Return to WhatsApp -->
+  <script>
+  (function(){
+    const s=document.createElement('style');
+    s.textContent='.wa-back-footer{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom, 0));left:12px;z-index:9999;pointer-events:none}.wa-back-btn{display:inline-flex;align-items:center;gap:4px;background:rgba(37,211,102,0.85);color:white;text-decoration:none;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:500;font-family:-apple-system,BlinkMacSystemFont,sans-serif;pointer-events:auto;backdrop-filter:blur(8px)}.wa-back-btn:active{transform:scale(0.95)}.wa-back-btn svg{width:12px;height:12px;fill:white}';
+    document.head.appendChild(s);
+    const f=document.createElement('footer');
+    f.className='wa-back-footer';
+    f.innerHTML='<a href="whatsapp://" class="wa-back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Return to WhatsApp</a>';
+    document.body.appendChild(f);
+  })();
+  </script>
+</body>
+</html>
